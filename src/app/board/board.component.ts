@@ -9,6 +9,7 @@ import { DataService } from '@services/data.service'
 export class BoardComponent implements OnInit {
 
   constructor(private dataService: DataService) {}
+  posts = this.dataService.posts;
 
   ngOnInit(): void {
   }
