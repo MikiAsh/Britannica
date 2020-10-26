@@ -3,6 +3,10 @@
 
 <main class="posts-container">
   <div *ngFor="let post of posts" class="post">
-    {{ post }}
+    Author: {{ post?.author }}
+    Message: {{ post?.message }}
+    Date: {{ post?.create_date }}
   </div>
 </main>
+
+<button (click)="add()">click to sort</button>

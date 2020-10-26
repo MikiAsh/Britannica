@@ -1,15 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Post } from '@app/models/Post'
+import { BehaviorSubject } from 'rxjs';
+
+import { Post } from '@app/models/Post';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  
+  postsUpdated$ = new BehaviorSubject<Post[]>(null);
+  posts: Post[] = [
+    {  
+      author: 'Mike',
+      message: 'some test text',
+      create_date: 10
+    },
+    {  
+      author: 'Sam',
+      message: 'another test text',
+      create_date: 12
+    },
+    {  
+      author: 'Lea',
+      message: 'yet another test text',
+      create_date: 5
+    },
+  ];
 
-  posts: any = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  constructor() { 
-    window.localStorage.setItem('store', JSON.stringify({posts: this.posts}));
+  constructor() {
+    if (!window.localStorage.getItem('store')) { // first load
+      window.localStorage.setItem('store', JSON.stringify({posts: this.posts}));
+    } else {
+      this.posts = JSON.parse(window.localStorage.getItem('store')).posts;
+      this.postsUpdated$.next(this.posts);
+    }
   }
 
   addPost(post: Post) {
@@ -18,7 +42,13 @@ export class DataService {
   }
 
   save() {
-    window.localStorage.setItem('store', JSON.stringify({posts: this.posts}));
+    try {
+      window.localStorage.setItem('store', JSON.stringify({posts: this.posts}));
+      this.postsUpdated$.next(this.posts);
+    } catch (error) {
+      console.log('Could not save post. ' + error);
+    }
+    
   }
 
 
