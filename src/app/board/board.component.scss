@@ -19,4 +19,14 @@ h1 {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .delete {
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    color: rgba(0, 0, 0, .3);
+    &:hover {
+      cursor: pointer;
+      color: #000;
+    }
+  }
 }

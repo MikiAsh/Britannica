@@ -16,12 +16,16 @@ export class BoardComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   ngOnInit(): void {
-    this.sub = this.dataService.postsUpdated$.subscribe(posts => {this.posts = posts; console.log('posts:', posts)});
+    this.sub = this.dataService.postsUpdated$.subscribe(posts => this.posts = posts);
   }
 
   add(): void {
     const newPost = {author: 'toto', message: 'new one', create_date: 2};
     this.dataService.addPost(newPost);
+  }
+
+  delete(post): void {
+    this.dataService.deletePost(post);
   }
 
   ngOnDestroy() {

@@ -3,18 +3,14 @@
 
 <main class="posts-container">
   <!-- <button (click)="add()">Add new Post</button> -->
-  <app-card>
+  <app-card class="plus-button">
     <ng-container ngProjectAs="title">Add a new note</ng-container>
     <app-add-new message></app-add-new> <!-- FAB button -->
   </app-card>
   <app-card *ngFor="let post of posts">
+    <i class="material-icons delete" delete (click)="delete(post)" title="delete">delete</i>
     <ng-container ngProjectAs="title">{{post.author}}</ng-container>
     <div message>{{post.message}}</div>
   </app-card>
-  <!-- <div *ngFor="let post of posts" class="post">
-    Author: {{ post?.author }}
-    Message: {{ post?.message }}
-    Date: {{ post?.create_date }}
-  </div> -->
 </main>
 

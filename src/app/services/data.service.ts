@@ -24,7 +24,13 @@ export class DataService {
 
   addPost(post: Post) {
     this.posts = [...this.posts, post].sort((a: Post, b:Post) => (a.create_date < b.create_date) ? 1 : -1);
-    this.save()
+    this.save();
+  }
+
+  deletePost(post: Post) {
+    const index = this.posts.findIndex(p => p === post);
+    this.posts.splice(index, 1);
+    this.save();
   }
 
   save() {
