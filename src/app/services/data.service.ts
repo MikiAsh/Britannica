@@ -10,11 +10,11 @@ export class DataService {
   
   private postsUpdatedSubject = new BehaviorSubject<Post[]>(null);
   postsUpdated$ = this.postsUpdatedSubject.asObservable();
-  
+
   posts: Post[] = [
     {  
       author: 'Mike',
-      message: 'some test text',
+      message: 'some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text',
       create_date: 10
     },
     {  
@@ -34,8 +34,8 @@ export class DataService {
       window.localStorage.setItem('store', JSON.stringify({posts: this.posts}));
     } else {
       this.posts = JSON.parse(window.localStorage.getItem('store')).posts;
-      this.postsUpdatedSubject.next(this.posts);
     }
+    this.postsUpdatedSubject.next(this.posts);
   }
 
   addPost(post: Post) {
