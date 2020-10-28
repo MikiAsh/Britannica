@@ -5,9 +5,7 @@
   <!-- <button (click)="add()">Add new Post</button> -->
   <app-card>
     <ng-container ngProjectAs="title">Add a new note</ng-container>
-    <button class="add" message mat-fab color="primary" aria-label="Example icon button with a delete icon">
-      <i class="material-icons">add</i>
-    </button>
+    <app-add-new message></app-add-new> <!-- FAB button -->
   </app-card>
   <app-card *ngFor="let post of posts">
     <ng-container ngProjectAs="title">{{post.author}}</ng-container>
