@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateNoteComponent } from '@app/create-note/create-note.component'
+import { DataService } from '@services/data.service'
 
 @Component({
   selector: 'app-add-new',
@@ -9,7 +10,7 @@ import { CreateNoteComponent } from '@app/create-note/create-note.component'
 })
 export class AddNewComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private dataService: DataService) {}
 
   ngOnInit(): void {
   }
@@ -18,10 +19,9 @@ export class AddNewComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
     dialogConfig.height = '400px';
+    
 
     const dialogRef = this.dialog.open(CreateNoteComponent, dialogConfig);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
+    dialogRef.afterClosed().toPromise().then(data =>  this.dataService.addPost(data) );
   }
 }

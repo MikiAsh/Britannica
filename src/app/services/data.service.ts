@@ -11,23 +11,7 @@ export class DataService {
   private postsUpdatedSubject = new BehaviorSubject<Post[]>(null);
   postsUpdated$ = this.postsUpdatedSubject.asObservable();
 
-  posts: Post[] = [
-    {  
-      author: 'Mike',
-      message: 'some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text some test text',
-      create_date: 10
-    },
-    {  
-      author: 'Sam',
-      message: 'another test text',
-      create_date: 12
-    },
-    {  
-      author: 'Lea',
-      message: 'yet another test text',
-      create_date: 5
-    },
-  ];
+  posts: Post[] = [];
 
   constructor() {
     if (!window.localStorage.getItem('store')) { // first load
@@ -39,7 +23,7 @@ export class DataService {
   }
 
   addPost(post: Post) {
-    this.posts = [...this.posts, post].sort((a: Post, b:Post) => (a.create_date > b.create_date) ? 1 : -1);
+    this.posts = [...this.posts, post].sort((a: Post, b:Post) => (a.create_date < b.create_date) ? 1 : -1);
     this.save()
   }
 

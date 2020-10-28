@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatDialogRef} from '@angular/material/dialog';
+import { Post } from '@app/models/Post';
 
 @Component({
   selector: 'app-create-note',
@@ -9,7 +11,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class CreateNoteComponent implements OnInit {
   
   noteForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(public dialogRef: MatDialogRef<CreateNoteComponent>, private formBuilder: FormBuilder) { }
+
 
   ngOnInit(): void {
     this.noteForm = this.formBuilder.group({
@@ -22,7 +25,9 @@ export class CreateNoteComponent implements OnInit {
     if (this.noteForm.invalid) {
       return;
     }
-    console.table(this.noteForm.value);
+
+    const post: Post = {...this.noteForm.value, create_date: Date.now()};
+    this.dialogRef.close(post);
   }
 
 }
