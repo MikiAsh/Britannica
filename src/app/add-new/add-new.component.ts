@@ -22,6 +22,6 @@ export class AddNewComponent implements OnInit {
     
 
     const dialogRef = this.dialog.open(CreateNoteComponent, dialogConfig);
-    dialogRef.afterClosed().toPromise().then(data =>  this.dataService.addPost(data) );
+    dialogRef.afterClosed().toPromise().then(data =>  data && this.dataService.addPost(data) );
   }
 }
