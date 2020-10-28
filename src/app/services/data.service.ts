@@ -8,7 +8,9 @@ import { Post } from '@app/models/Post';
 })
 export class DataService {
   
-  postsUpdated$ = new BehaviorSubject<Post[]>(null);
+  private postsUpdatedSubject = new BehaviorSubject<Post[]>(null);
+  postsUpdated$ = this.postsUpdatedSubject.asObservable();
+  
   posts: Post[] = [
     {  
       author: 'Mike',
@@ -32,7 +34,7 @@ export class DataService {
       window.localStorage.setItem('store', JSON.stringify({posts: this.posts}));
     } else {
       this.posts = JSON.parse(window.localStorage.getItem('store')).posts;
-      this.postsUpdated$.next(this.posts);
+      this.postsUpdatedSubject.next(this.posts);
     }
   }
 
@@ -44,7 +46,7 @@ export class DataService {
   save() {
     try {
       window.localStorage.setItem('store', JSON.stringify({posts: this.posts}));
-      this.postsUpdated$.next(this.posts);
+      this.postsUpdatedSubject.next(this.posts);
     } catch (error) {
       console.log('Could not save post. ' + error);
     }
