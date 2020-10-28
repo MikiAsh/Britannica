@@ -1,6 +1,7 @@
-:host {
-  height: 100%;
+form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  textarea {
+    height: 90px;
+  }
 }
