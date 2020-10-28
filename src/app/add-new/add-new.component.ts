@@ -17,7 +17,7 @@ export class AddNewComponent implements OnInit {
   popDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    dialogConfig.height = '450px';
+    dialogConfig.height = '400px';
 
     const dialogRef = this.dialog.open(CreateNoteComponent, dialogConfig);
     // dialogRef.afterClosed().subscribe(result => {
